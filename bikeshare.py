@@ -7,6 +7,25 @@ CITY_DATA = {
     'washington': 'washington.csv'
 }
 
+def get_user_input(prompt, valid_options):
+    """
+    Reusable function to get validated user input.
+
+    Args:
+        prompt (str): The input prompt to show to the user
+        valid_options (list or dict_keys): Valid input options
+
+    Returns:
+        str: validated user input
+    """
+    while True:
+        user_input = input(prompt).lower()
+        if user_input == 'exit':
+            exit()
+        if user_input in valid_options:
+            return user_input
+        print("Invalid input. Try again.")
+
 def get_filters():
     """
     Asks user to specify a city, month, and day to analyze.
@@ -19,34 +38,9 @@ def get_filters():
     print("Hello! Let's explore some US bikeshare data!")
     print("You can type 'exit' anytime to quit the program.\n")
 
-    # City
-    while True:
-        city = input("Enter city (Chicago, New York City, Washington): ").lower()
-        if city == 'exit':
-            exit()
-        if city in CITY_DATA:
-            break
-        print("Invalid city. Try again.")
-
-    # Month
-    months = ['january', 'february', 'march', 'april', 'may', 'june', 'all']
-    while True:
-        month = input("Enter month (January - June) or 'all': ").lower()
-        if month == 'exit':
-            exit()
-        if month in months:
-            break
-        print("Invalid month. Try again.")
-
-    # Day
-    days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday', 'all']
-    while True:
-        day = input("Enter day (e.g., Monday) or 'all': ").lower()
-        if day == 'exit':
-            exit()
-        if day in days:
-            break
-        print("Invalid day. Try again.")
+    city = get_user_input("Enter city (Chicago, New York City, Washington): ", CITY_DATA.keys())
+    month = get_user_input("Enter month (January - June) or 'all': ", ['january', 'february', 'march', 'april', 'may', 'june', 'all'])
+    day = get_user_input("Enter day (e.g., Monday) or 'all': ", ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday', 'all'])
 
     print('-'*40)
     return city, month, day
@@ -110,7 +104,7 @@ def station_stats(df):
     print('Most Common Start Station:', df['Start Station'].mode()[0])
     print('Most Common End Station:', df['End Station'].mode()[0])
 
-    df['Trip'] = df['Start Station'] + " -> " + df['End Station']
+    df['Trip'] = df['Start Station'].str.cat(df['End Station'], sep=' -> ')
     print('Most Common Trip:', df['Trip'].mode()[0])
 
     print("\nThis took %s seconds." % (time.time() - start_time))
@@ -126,8 +120,11 @@ def trip_duration_stats(df):
     print('\nCalculating Trip Duration...\n')
     start_time = time.time()
 
-    print('Total Travel Time (seconds):', df['Trip Duration'].sum())
-    print('Average Travel Time (seconds):', df['Trip Duration'].mean())
+    total_time = df['Trip Duration'].sum()
+    average_time = df['Trip Duration'].mean()
+
+    print(f"Total Travel Time: {total_time:,.0f} seconds")
+    print(f"Average Travel Time: {average_time:,.2f} seconds")
 
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
