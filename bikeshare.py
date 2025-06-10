@@ -9,14 +9,7 @@ CITY_DATA = {
 
 def get_user_input(prompt, valid_options):
     """
-    Reusable function to get validated user input.
-
-    Args:
-        prompt (str): The input prompt to show to the user
-        valid_options (list or dict_keys): Valid input options
-
-    Returns:
-        str: validated user input
+    Generic function to handle user input validation.
     """
     while True:
         user_input = input(prompt).lower()
@@ -28,34 +21,24 @@ def get_user_input(prompt, valid_options):
 
 def get_filters():
     """
-    Asks user to specify a city, month, and day to analyze.
-
-    Returns:
-        city (str): name of the city to analyze
-        month (str): name of the month to filter by, or "all"
-        day (str): name of the day of week to filter by, or "all"
+    Gets filters from user for city, month, and day.
     """
     print("Hello! Let's explore some US bikeshare data!")
-    print("You can type 'exit' anytime to quit the program.\n")
+    print("You can type 'exit' anytime to quit the program.
+")
 
     city = get_user_input("Enter city (Chicago, New York City, Washington): ", CITY_DATA.keys())
-    month = get_user_input("Enter month (January - June) or 'all': ", ['january', 'february', 'march', 'april', 'may', 'june', 'all'])
-    day = get_user_input("Enter day (e.g., Monday) or 'all': ", ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday', 'all'])
+    month = get_user_input("Enter month (January - June) or 'all': ", 
+                           ['january', 'february', 'march', 'april', 'may', 'june', 'all'])
+    day = get_user_input("Enter day (e.g., Monday) or 'all': ", 
+                         ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday', 'all'])
 
     print('-'*40)
     return city, month, day
 
 def load_data(city, month, day):
     """
-    Loads data for the specified city and filters by month and day if applicable.
-
-    Args:
-        city (str): name of the city
-        month (str): name of the month or "all"
-        day (str): name of the day or "all"
-
-    Returns:
-        df (DataFrame): filtered data
+    Loads data based on selected city, month, and day.
     """
     df = pd.read_csv(CITY_DATA[city])
     df['Start Time'] = pd.to_datetime(df['Start Time'])
@@ -77,9 +60,6 @@ def load_data(city, month, day):
 def time_stats(df):
     """
     Displays statistics on the most frequent times of travel.
-
-    Args:
-        df (DataFrame): filtered bikeshare data
     """
     print('\nCalculating The Most Frequent Times of Travel...\n')
     start_time = time.time()
@@ -94,9 +74,6 @@ def time_stats(df):
 def station_stats(df):
     """
     Displays statistics on the most popular stations and trip.
-
-    Args:
-        df (DataFrame): filtered bikeshare data
     """
     print('\nCalculating The Most Popular Stations and Trip...\n')
     start_time = time.time()
@@ -112,19 +89,13 @@ def station_stats(df):
 
 def trip_duration_stats(df):
     """
-    Displays statistics on the total and average trip duration.
-
-    Args:
-        df (DataFrame): filtered bikeshare data
+    Displays statistics on trip durations.
     """
     print('\nCalculating Trip Duration...\n')
     start_time = time.time()
 
-    total_time = df['Trip Duration'].sum()
-    average_time = df['Trip Duration'].mean()
-
-    print(f"Total Travel Time: {total_time:,.0f} seconds")
-    print(f"Average Travel Time: {average_time:,.2f} seconds")
+    print('Total Travel Time (seconds):', df['Trip Duration'].sum())
+    print('Average Travel Time (seconds):', df['Trip Duration'].mean())
 
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
@@ -132,9 +103,6 @@ def trip_duration_stats(df):
 def user_stats(df):
     """
     Displays statistics on bikeshare users.
-
-    Args:
-        df (DataFrame): filtered bikeshare data
     """
     print('\nCalculating User Stats...\n')
     start_time = time.time()
@@ -154,10 +122,7 @@ def user_stats(df):
 
 def display_raw_data(df):
     """
-    Displays 5 rows of raw data upon user request.
-
-    Args:
-        df (DataFrame): filtered bikeshare data
+    Displays raw data 5 rows at a time on user request.
     """
     i = 0
     while True:
@@ -171,7 +136,7 @@ def display_raw_data(df):
 
 def main():
     """
-    Main program loop: runs the full interactive bikeshare analysis program.
+    Main function to run the program.
     """
     while True:
         city, month, day = get_filters()
