@@ -1,37 +1,52 @@
-README - Bikeshare Data Project
--------------------------------
+# Bikeshare Data Analysis Project
 
-Author: Mahmoud shoman	
-Date: 08-04-2025
+**Author:** Mahmoud Shoman  
+**Date:** 08-04-2025  
+**Course:** Data Science Nanodegree / Python Programming  
 
-Project: US Bikeshare Data Analysis
-Course: Data Science Nanodegree / Python Programming
+---
 
-Description:
--------------
-This project analyzes bike share data from three US cities (Chicago, New York City, and Washington) to uncover usage patterns. The user is prompted for inputs to filter the data by city, month, and day, and the script outputs useful statistics such as popular travel times, station usage, trip durations, and user demographics.
+## Dscription
 
-Tools Used:
------------
-- Python 3.10
-- pandas
-- time module
+This project analyzes bikeshare data from three US cities (**Chicago**, **New York City**, and **Washington**) to uncover usage patterns.
 
-External Resources Used:
-------------------------
-- Udacity project instructions and template
-- pandas official documentation:
-  https://pandas.pydata.org/pandas-docs/stable/
-- Python documentation (datetime, string methods):
-  https://docs.python.org/3/
-- Stack Overflow (for troubleshooting input handling and `.mode()`):
-  https://stackoverflow.com/
+The user is prompted for inputs to filter the data by city, month, and day, and the script outputs useful statistics such as:
+- Most popular travel times
+- Common start and end stations
+- Trip durations
+- User types and demographics
 
-How to Run:
------------
-1. Make sure the files `bikeshare.py`, `chicago.csv`, `new_york_city.csv`, and `washington.csv` are in the same folder.
-2. Run the script from terminal:
+---
+
+##  Tools Used
+
+- Python 3.10  
+- pandas  
+- time module  
+
+---
+
+##  External Resources
+
+- [Udacity Project Instructions](https://www.udacity.com/)  
+- [pandas Documentation](https://pandas.pydata.org/pandas-docs/stable/)  
+- [Python Documentation](https://docs.python.org/3/)  
+- [Stack Overflow](https://stackoverflow.com/)
+
+---
+
+##  How to Run
+
+1. Ensure the following files are in the same folder:
+   - `bikeshare.py`
+   - `chicago.csv`
+   - `new_york_city.csv`
+   - `washington.csv`
+2. Open terminal and run:
+   ```bash
    python bikeshare.py
-3. Follow the on-screen instructions to explore the data.
+
+3. Follow the on-screen prompts to interact with the data.
+
 4. Type "exit" at any prompt to quit.
 

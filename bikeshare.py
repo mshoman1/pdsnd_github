@@ -8,6 +8,14 @@ CITY_DATA = {
 }
 
 def get_filters():
+    """
+    Asks user to specify a city, month, and day to analyze.
+
+    Returns:
+        city (str): name of the city to analyze
+        month (str): name of the month to filter by, or "all"
+        day (str): name of the day of week to filter by, or "all"
+    """
     print("Hello! Let's explore some US bikeshare data!")
     print("You can type 'exit' anytime to quit the program.\n")
 
@@ -44,6 +52,17 @@ def get_filters():
     return city, month, day
 
 def load_data(city, month, day):
+    """
+    Loads data for the specified city and filters by month and day if applicable.
+
+    Args:
+        city (str): name of the city
+        month (str): name of the month or "all"
+        day (str): name of the day or "all"
+
+    Returns:
+        df (DataFrame): filtered data
+    """
     df = pd.read_csv(CITY_DATA[city])
     df['Start Time'] = pd.to_datetime(df['Start Time'])
 
@@ -62,6 +81,12 @@ def load_data(city, month, day):
     return df
 
 def time_stats(df):
+    """
+    Displays statistics on the most frequent times of travel.
+
+    Args:
+        df (DataFrame): filtered bikeshare data
+    """
     print('\nCalculating The Most Frequent Times of Travel...\n')
     start_time = time.time()
 
@@ -73,6 +98,12 @@ def time_stats(df):
     print('-'*40)
 
 def station_stats(df):
+    """
+    Displays statistics on the most popular stations and trip.
+
+    Args:
+        df (DataFrame): filtered bikeshare data
+    """
     print('\nCalculating The Most Popular Stations and Trip...\n')
     start_time = time.time()
 
@@ -86,6 +117,12 @@ def station_stats(df):
     print('-'*40)
 
 def trip_duration_stats(df):
+    """
+    Displays statistics on the total and average trip duration.
+
+    Args:
+        df (DataFrame): filtered bikeshare data
+    """
     print('\nCalculating Trip Duration...\n')
     start_time = time.time()
 
@@ -96,16 +133,20 @@ def trip_duration_stats(df):
     print('-'*40)
 
 def user_stats(df):
+    """
+    Displays statistics on bikeshare users.
+
+    Args:
+        df (DataFrame): filtered bikeshare data
+    """
     print('\nCalculating User Stats...\n')
     start_time = time.time()
 
     print('User Type Counts:\n', df['User Type'].value_counts())
 
-    # Gender column only exists in Chicago and NYC
     if 'Gender' in df.columns:
         print('\nGender Counts:\n', df['Gender'].value_counts())
 
-    # Birth Year stats
     if 'Birth Year' in df.columns:
         print('\nEarliest Birth Year:', int(df['Birth Year'].min()))
         print('Most Recent Birth Year:', int(df['Birth Year'].max()))
@@ -115,6 +156,12 @@ def user_stats(df):
     print('-'*40)
 
 def display_raw_data(df):
+    """
+    Displays 5 rows of raw data upon user request.
+
+    Args:
+        df (DataFrame): filtered bikeshare data
+    """
     i = 0
     while True:
         show_data = input("\nWould you like to view 5 rows of raw data? Enter yes, no, or 'exit': ").lower()
@@ -126,6 +173,9 @@ def display_raw_data(df):
         i += 5
 
 def main():
+    """
+    Main program loop: runs the full interactive bikeshare analysis program.
+    """
     while True:
         city, month, day = get_filters()
         df = load_data(city, month, day)
